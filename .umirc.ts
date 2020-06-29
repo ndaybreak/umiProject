@@ -43,7 +43,7 @@ export default defineConfig({
   //   });
   // },
   scripts: [
-    'http://res.wx.qq.com/open/js/jweixin-1.6.0.js'
+    'https://res.wx.qq.com/open/js/jweixin-1.6.0.js'
   ],
   hash: true,
   manifest: {},

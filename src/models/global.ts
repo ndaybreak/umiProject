@@ -1,5 +1,5 @@
 import {Subscription, Effect, Reducer} from "umi"
-import { getSysConfig } from '@/services/api'
+import { getSysConfig, getWxConfig } from '@/services/api'
 
 export interface GlobalModelState {
   status?: 'ok' | 'error'
@@ -11,6 +11,7 @@ export interface GlobalModelType {
   state: GlobalModelState;
   effects: {
     fetchConfig: Effect;
+    fetchWxConfig: Effect;
   };
   reducers: {
     saveConfig: Reducer<GlobalModelState>;
@@ -37,13 +38,18 @@ const Model: GlobalModelType = {
         })
       }
     },
+
+    *fetchWxConfig({callback}, { call, put }) {
+      const res = yield call(getWxConfig)
+      if(res.response.status === 200) {
+        callback && callback(res.data)
+      }
+    },
   },
 
   reducers: {
     saveConfig(state, { payload }) {
-
       localStorage.setItem("globalConfig",JSON.stringify(payload))
-
       return {
         ...state,
         config: payload,

@@ -5,7 +5,7 @@ export interface UserModelState {
   name?: string
 }
 
-export interface GlobalModelType {
+export interface UserModelType {
   namespace: string;
   state: UserModelState;
   effects: {
@@ -16,7 +16,7 @@ export interface GlobalModelType {
   };
 }
 
-const Model: GlobalModelType = {
+const Model: UserModelType = {
   namespace: 'user',
 
   state: {

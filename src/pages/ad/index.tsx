@@ -4,7 +4,6 @@ import styles from './index.less'
 import { ReactComponent as Logo } from '@/assets/logo.svg'
 
 export default (props: any) => {
-  console.log(props)
   return (
     <div style={{height: '600px'}}>
       {/* 用户离开页面时提示一个选择 */}

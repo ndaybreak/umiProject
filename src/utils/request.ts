@@ -10,6 +10,7 @@ let server_url  = `https://test-api-admin-wecare.medtreehealth.com`
 if( hostname == "admin-wecare.medtreehealth.com"){
     server_url  = `https://api-admin-wecare.medtreehealth.com`
 }
+server_url = '/api'
 export const APIPATH = server_url
 
 
@@ -38,15 +39,10 @@ notification.config({
 /**
  * 异常处理程序
  */
-const errorHandler = (error: { response: Response, data: any }): Response => {
-  const { response, data } = error;
+const errorHandler = (error: { response: Response}): Response => {
+  const { response } = error;
 
-  if(data && data.status === 5555) {
-    notification.error({
-      message: '提示',
-      description: data.message,
-    });
-  } else if (response && response.status) {
+  if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
 

@@ -1,6 +1,5 @@
 import { GlobalModelState } from './global'
 import {UserModelState} from "@/pages/user/models/user";
-export { GlobalModelState }
 
 export interface Loading {
   global: boolean;
