@@ -18,29 +18,17 @@ const Index: React.FC<UserProps> = (props) => {
   const { dispatch, loading, user, global } = props
 
   useEffect(() => {
-  }, [])
-
-  const handleGetWxConfig = () => {
     dispatch({
       type: 'global/fetchWxConfig',
       callback: (conf: any) => {
         // @ts-ignore
         wx.config({
-          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
           ...conf,
           jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表
         })
         // @ts-ignore
         wx.ready(function(){
-          // @ts-ignore
-          wx.chooseImage({
-            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success: function (res: any) {
-              var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-              alert(localIds)
-            }
-          });
           // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
         })
         // @ts-ignore
@@ -50,6 +38,18 @@ const Index: React.FC<UserProps> = (props) => {
         });
       }
     })
+  }, [])
+
+  const handleGetWxConfig = () => {
+    // @ts-ignore
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res: any) {
+        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+        alert(localIds)
+      }
+    });
   }
 
   return (

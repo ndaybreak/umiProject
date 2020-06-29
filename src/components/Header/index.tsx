@@ -12,13 +12,13 @@ export default () => {
       </NavLink>
       {/* 当前路由为 /faq 时，附着 style */}
       <NavLink
-        to="/faq"
+        to="/wx"
         activeStyle={{
           fontWeight: "bold",
           color: "red",
         }}
       >
-        FAQs
+        wx
       </NavLink>
       {/* 当前路由完全匹配为 /profile 时，附着 class */}
       <NavLink exact to="/profile" activeClassName="selected">

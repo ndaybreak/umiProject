@@ -15,6 +15,7 @@ export default defineConfig({
         { path: '/', component: '@/pages/index' },
         { path: '/user', component: '@/pages/user/index', wrappers: ['@/wrappers/auth']},
         { path: '/ad', component: '@/pages/ad/index' },
+        { path: '/wx', component: '@/pages/wx/index' },
       ],
     },
   ],
