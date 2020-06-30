@@ -1,7 +1,6 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  antd: {},
   dynamicImport: {},
   nodeModulesTransform: {
     type: 'none',

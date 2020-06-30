@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react"
-import { Breadcrumb, Input, Row, Col, Button, Pagination, Spin, Modal, notification } from 'antd'
 import {  connect, Dispatch, useRouteMatch } from 'umi'
 import {ConnectState} from '@/models/connect'
 
@@ -24,7 +23,7 @@ const Index: React.FC<WxProps> = (props) => {
         })
         // @ts-ignore
         wx.ready(function(){
-          alert("success")
+          // alert("success")
         })
         // @ts-ignore
         wx.error(function(res: any){
@@ -61,12 +60,12 @@ const Index: React.FC<WxProps> = (props) => {
   }
 
   return (
-    <Spin spinning={!!loading}>
+    <div>
       Page WX
       <div>
-        <Button onClick={handleOpenMap}>打开地图</Button>
+        <button onClick={handleOpenMap}>打开地图</button>
       </div>
-    </Spin>
+    </div>
   )
 }
 

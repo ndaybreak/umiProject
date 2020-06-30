@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react"
-import { Breadcrumb, Input, Row, Col, Button, Pagination, Spin, Modal, notification } from 'antd'
 import {  connect, Dispatch, useRouteMatch } from 'umi'
 import {ConnectState} from '@/models/connect'
 import {UserModelState} from "@/pages/user/models/user";
@@ -53,12 +52,12 @@ const Index: React.FC<UserProps> = (props) => {
   }
 
   return (
-    <Spin spinning={!!loading}>
+    <div>
       Page user {user.name}
       <div>
-        <Button onClick={handleGetWxConfig}>get wx config</Button>
+        <button onClick={handleGetWxConfig}>get wx config</button>
       </div>
-    </Spin>
+    </div>
   )
 }
 
