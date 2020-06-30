@@ -12,7 +12,7 @@ export default defineConfig({
       path: '/',
       component: '@/layouts/Basic',
       routes: [
-        { path: '/', component: '@/pages/index' },
+        { path: '/', component: '@/pages/test/index' },
         { path: '/user', component: '@/pages/user/index', wrappers: ['@/wrappers/auth']},
         { path: '/ad', component: '@/pages/ad/index' },
         { path: '/wx', component: '@/pages/wx/index' },
@@ -51,4 +51,7 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
+  extraBabelPlugins: [
+    ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
+  ]
 });

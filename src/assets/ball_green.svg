@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+  <g>
+    <g>
+      <defs>
+        <linearGradient id="gradient_ball_active" gradientTransform="rotate(90)">
+          <stop offset="0%" stop-color="#71E1C5" />
+          <stop offset="100%" stop-color="#12CD9F" />
+        </linearGradient>
+      </defs>
+      <path fill="url('#gradient_ball_active')" d="M35.85,6.15a21,21,0,1,0,0,29.7A21,21,0,0,0,35.85,6.15ZM29.66,30a14,14,0,0,1-17.32,0,1.5,1.5,0,0,1,1.88-2.34,11,11,0,0,0,13.56,0,1.5,1.5,0,0,1,2,.11h0A1.5,1.5,0,0,1,29.66,30Z" />
+    </g>
+  </g>
+</svg>
