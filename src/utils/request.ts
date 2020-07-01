@@ -2,19 +2,18 @@
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-import {extend} from 'umi-request';
-import { notification } from 'antd';
+import { extend } from 'umi-request';
+import { Toast } from 'antd-mobile';
 
-const hostname  = window.location.hostname
-let server_url  = `https://test-api-admin-wecare.medtreehealth.com`
-if( hostname == "admin-wecare.medtreehealth.com"){
-    server_url  = `https://api-admin-wecare.medtreehealth.com`
+const hostname = window.location.hostname;
+let server_url = `https://test-api-admin-wecare.medtreehealth.com`;
+if (hostname == 'admin-wecare.medtreehealth.com') {
+  server_url = `https://api-admin-wecare.medtreehealth.com`;
 }
-server_url = '/api'
-export const APIPATH = server_url
+server_url = '/api';
+export const APIPATH = server_url;
 
-
-const codeMessage: {[key: number]: string} = {
+const codeMessage: { [key: number]: string } = {
   200: '服务器成功返回请求的数据。',
   201: '新建d或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -32,36 +31,18 @@ const codeMessage: {[key: number]: string} = {
   504: '网关超时。',
 };
 
-//3秒消失
-notification.config({
-  duration: 3
-});
 /**
  * 异常处理程序
  */
-const errorHandler = (error: { response: Response}): Response => {
+const errorHandler = (error: { response: Response }): Response => {
   const { response } = error;
 
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
-
-    if(status == 403) {
-      notification.error({
-        message: `错误`,
-        description: '您暂无权限访问该板块',
-      });
-    } else {
-      notification.error({
-        message: `请求错误 ${status}: ${url}`,
-        description: errorText,
-      });
-    }
+    Toast.fail(`请求错误 ${status}: ${url}`, 3);
   } else if (!response) {
-    notification.error({
-      description: '您的网络发生异常，无法连接服务器',
-      message: '网络异常',
-    });
+    Toast.fail('网络异常', 3);
   }
   return response;
 };
@@ -70,13 +51,13 @@ const errorHandler = (error: { response: Response}): Response => {
  * 配置request请求时的默认参数
  */
 const request = extend({
-  getResponse:true,
-  parseResponse:true,
+  getResponse: true,
+  parseResponse: true,
   errorHandler, // 默认错误处理
   // credentials: 'include', // 默认请求是否带上cookie
   headers: {
-    token: localStorage.getItem('token') || ''
-  }
+    token: localStorage.getItem('token') || '',
+  },
 });
 
 export default request;

@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from 'react'
-import { TabBar } from 'antd-mobile'
-import { useLocation, history } from 'umi'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import {ReactComponent as IconHome} from "@/assets/home.svg";
-import {ReactComponent as IconHomeActive} from "@/assets/home_green.svg";
-import {ReactComponent as IconAd} from "@/assets/basket.svg";
-import {ReactComponent as IconAdActive} from "@/assets/basket_green.svg";
-import {ReactComponent as IconBall} from "@/assets/ball.svg";
-import {ReactComponent as IconBallActive} from "@/assets/ball_green.svg";
-import styles from './basic.less'
+import React, { useState, useEffect } from 'react';
+import { TabBar } from 'antd-mobile';
+import { useLocation, history } from 'umi';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ReactComponent as IconHome } from '@/assets/home.svg';
+import { ReactComponent as IconHomeActive } from '@/assets/home_green.svg';
+import { ReactComponent as IconAd } from '@/assets/basket.svg';
+import { ReactComponent as IconAdActive } from '@/assets/basket_green.svg';
+import { ReactComponent as IconBall } from '@/assets/ball.svg';
+import { ReactComponent as IconBallActive } from '@/assets/ball_green.svg';
+import styles from './basic.less';
 
 const PATHMAP = {
-  home: '/',
+  home: '/recipe/month',
   wx: '/wx',
-  user: '/user'
-}
+  user: '/user',
+};
 
 export default (props: any) => {
-  const { pathname: path } = useLocation()
+  const { pathname: path } = useLocation();
 
   return (
-    <div  className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <TabBar
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
         barTintColor="white"
       >
         <TabBar.Item
-          title="首页"
-          key="home"
+          title="食谱"
+          key="recipe"
           icon={<IconHome />}
           selectedIcon={<IconHomeActive />}
           selected={path === PATHMAP.home}
           onPress={() => {
-            history.push(PATHMAP.home)
+            history.push(PATHMAP.home);
           }}
         >
           {path === PATHMAP.home && props.children}
@@ -46,7 +46,7 @@ export default (props: any) => {
           key="wx"
           selected={path === PATHMAP.wx}
           onPress={() => {
-            history.push(PATHMAP.wx)
+            history.push(PATHMAP.wx);
           }}
         >
           {path === PATHMAP.wx && props.children}
@@ -58,12 +58,12 @@ export default (props: any) => {
           key="my"
           selected={path === PATHMAP.user}
           onPress={() => {
-            history.push(PATHMAP.user)
+            history.push(PATHMAP.user);
           }}
         >
           {path === PATHMAP.user && props.children}
         </TabBar.Item>
       </TabBar>
     </div>
-  )
-}
+  );
+};
