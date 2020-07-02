@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect, Dispatch, useRouteMatch, useParams, history } from 'umi';
 import { NavBar, WhiteSpace, Icon, WingBlank, ListView } from 'antd-mobile';
 import { ConnectState } from '@/models/connect';
-import { UserModelState } from '@/pages/user/models/user';
 import { GlobalModelState } from '@/models/global';
 import styles from './index.less';
 import { RecipeModelState } from '@/pages/recipe/models';
@@ -16,49 +15,56 @@ interface UserProps {
 }
 
 const List: React.FC<UserProps> = props => {
-  const { dispatch, loading, global } = props;
+  const { dispatch, loading, global, recipe } = props;
   const { month } = useParams();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {}, []);
+  const loadData = () => {
+    setIsLoading(true);
+    dispatch({
+      type: 'recipe/fetchData',
+      callback: () => {
+        setIsLoading(false);
+      },
+    });
+  };
 
-  const data = new ListView.DataSource({
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const dataSource = new ListView.DataSource({
     rowHasChanged: (row1: any, row2: any) => row1 !== row2,
   });
 
   const handleOnEndReached = (args: any) => {
-    console.log(args);
+    loadData();
+  };
+
+  const handleShowDetail = (rowID: number) => {
+    history.push('/recipe/detail');
   };
 
   const row = (rowData: any, sectionID: any, rowID: any) => {
     return (
-      <div key={rowID} style={{ padding: '0 15px' }}>
-        <div
-          style={{
-            lineHeight: '50px',
-            color: '#888',
-            fontSize: 18,
-            borderBottom: '1px solid #F6F6F6',
-          }}
-        >
-          {rowData.title}
-        </div>
+      <div
+        key={rowID}
+        style={{ padding: '0 15px' }}
+        onClick={() => handleShowDetail(rowID)}
+      >
         <div style={{ display: 'flex', padding: '15px 0' }}>
           <img
-            style={{ height: '64px', marginRight: '15px' }}
-            src={rowData.img}
+            style={{ width: 120, maxHeight: 100, marginRight: 15 }}
+            src={rowData.thumbUrl}
             alt=""
           />
           <div style={{ lineHeight: 1 }}>
-            <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>
-              {rowData.des}
+            <div
+              style={{ margin: '5px 0 8px', fontSize: '16px', color: '#333' }}
+            >
+              {rowData.title}
             </div>
-            <div>
-              <span style={{ fontSize: '30px', color: '#FF6E27' }}>
-                {rowID}
-              </span>
-              ¥
-            </div>
+            <div style={{ color: '#666' }}>{rowData.desc}</div>
           </div>
         </div>
       </div>
@@ -77,14 +83,9 @@ const List: React.FC<UserProps> = props => {
       </NavBar>
 
       <ListView
-        dataSource={data.cloneWithRows({
-          1: { title: 'xxxx1', desc: 'yyyyy1' },
-          2: { title: 'xxxx2', desc: 'yyyyy1' },
-          3: { title: 'xxxx3', desc: 'yyyyy1' },
-          4: { title: 'xxxx4', desc: 'yyyyy1' },
-        })}
+        dataSource={dataSource.cloneWithRows(recipe.data)}
         renderFooter={() => (
-          <div style={{ padding: 30, textAlign: 'center' }}>
+          <div style={{ padding: 10, textAlign: 'center' }}>
             {isLoading ? 'Loading...' : 'Loaded'}
           </div>
         )}

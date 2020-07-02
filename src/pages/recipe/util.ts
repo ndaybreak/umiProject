@@ -1,6 +1,7 @@
 import IconRice from '@/assets/rice.png';
 import Icon from '@/assets/vegetables.png';
 import IconFruit from '@/assets/fruit.png';
+import IconMeat from '@/assets/meat.png';
 
 export const monthData = [
   {
@@ -28,19 +29,19 @@ export const monthData = [
     text: '六月',
   },
   {
-    icon: IconFruit,
+    icon: IconMeat,
     text: '七月',
   },
   {
-    icon: IconFruit,
+    icon: IconMeat,
     text: '八月',
   },
   {
-    icon: IconFruit,
+    icon: IconMeat,
     text: '九月',
   },
   {
-    icon: Icon,
+    icon: IconFruit,
     text: '十月',
   },
 ];

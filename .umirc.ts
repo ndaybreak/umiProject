@@ -9,6 +9,7 @@ export default defineConfig({
   routes: [
     { path: '/login', component: '@/pages/login/index', title: '欢迎登陆' },
     { path: '/recipe/list/:month', component: '@/pages/recipe/list' },
+    { path: '/recipe/detail', component: '@/pages/recipe/detail' },
     {
       path: '/',
       component: '@/layouts/Basic',
@@ -58,4 +59,5 @@ export default defineConfig({
   extraBabelPlugins: [
     ['import', { libraryName: 'antd-mobile', style: 'css' }], // `style: true` 会加载 less 文件
   ],
+  request: false, // plugin-request 中有用antd, 禁用request防止加载antd
 });

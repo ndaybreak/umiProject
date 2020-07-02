@@ -1,10 +1,20 @@
 .monthWrapper {
-  //height: 100%;
-  //background-color: white;
+  height: 100%;
+  background-color: white;
+  :global {
+    .am-grid .am-flexbox .am-flexbox-item .am-grid-item-content {
+      padding-bottom: 0;
+    }
+  }
 }
 
 .listWrapper {
   padding-top: 50px;
+  :global {
+    .list-view-section-body > div:not(:first-child) {
+      border-top: 1px solid #f3f3f3;
+    }
+  }
 }
 
 .listNav {
@@ -13,4 +23,11 @@
   width: 100%;
   border-bottom: 1px solid #f3f3f3;
   z-index: 99;
+}
+
+.detailWrapper {
+  min-height: 100%;
+  background-color: white;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
 }

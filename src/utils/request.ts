@@ -60,4 +60,5 @@ const request = extend({
   },
 });
 
+// @ts-ignore
 export default request;

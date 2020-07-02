@@ -1,50 +1,68 @@
 import { Subscription, Effect, Reducer } from 'umi';
 import { getSysConfig } from '@/services/api';
-
+import { delay } from '@/utils/utils';
+import IconFood1 from '@/assets/food1.png';
+import IconFood2 from '@/assets/food2.png';
+export interface Recipe {
+  title: string;
+  desc?: string;
+  thumbUrl?: any;
+}
 export interface RecipeModelState {
-  name?: string;
+  data: { [key: number]: Recipe };
 }
 
 export interface RecipeModelType {
   namespace: string;
   state: RecipeModelState;
   effects: {
-    // fetchConfig: Effect;
+    fetchData: Effect;
   };
   reducers: {
-    // saveConfig: Reducer<UserModelState>;
+    saveData: Reducer<RecipeModelState>;
   };
 }
+
+let index = 1;
+const DefaultData = [
+  { title: '糖醋排骨', desc: '营养成分：嘻嘻嘻嘻嘻嘻嘻', thumbUrl: IconFood1 },
+  { title: '鱼香肉丝', desc: '配料：嘻嘻嘻嘻嘻嘻嘻', thumbUrl: IconFood2 },
+  { title: '青椒炒蛋', desc: '配料：嘻嘻嘻嘻嘻嘻嘻', thumbUrl: IconFood1 },
+  { title: '清蒸鲈鱼', desc: '配料：嘻嘻嘻嘻嘻嘻嘻', thumbUrl: IconFood2 },
+  { title: '酸辣土豆丝', desc: '配料：嘻嘻嘻嘻嘻嘻嘻', thumbUrl: IconFood2 },
+];
 
 const Model: RecipeModelType = {
   namespace: 'recipe',
 
   state: {
-    name: 'xiao',
+    data: {},
   },
 
   effects: {
-    // *fetchConfig(_, { call, put }) {
-    //   const res = yield call(getSysConfig)
-    //   if(res.status === 200) {
-    //     yield put({
-    //       type: 'saveConfig',
-    //       payload: res.data
-    //     })
-    //   }
-    // },
+    *fetchData(_, { call, put }) {
+      yield delay(400);
+      const result: { [key: number]: Recipe } = {};
+      for (let i = 0; i < 5; i++) {
+        result[index++] = DefaultData[i];
+      }
+      yield put({
+        type: 'saveData',
+        payload: result,
+      });
+    },
   },
 
   reducers: {
-    // saveConfig(state, { payload }) {
-    //
-    //   localStorage.setItem("globalConfig",JSON.stringify(payload))
-    //
-    //   return {
-    //     ...state,
-    //     config: payload,
-    //   }
-    // },
+    saveData(state, { payload }) {
+      return {
+        ...state,
+        data: {
+          ...state?.data,
+          ...payload,
+        },
+      };
+    },
   },
 };
 

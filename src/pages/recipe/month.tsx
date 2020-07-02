@@ -21,15 +21,18 @@ const Month: React.FC<UserProps> = props => {
 
   return (
     <div className={styles.monthWrapper}>
-      <WhiteSpace size="lg" />
       <Grid
         data={monthData}
         columnNum={3}
         hasLine={false}
         renderItem={dataItem => (
-          <div style={{ padding: '12.5px' }}>
-            <img src={dataItem?.icon} style={{ width: '40px' }} alt="" />
-            <div style={{ color: '#111', fontSize: '14px', marginTop: '12px' }}>
+          <div>
+            <img
+              src={dataItem?.icon}
+              style={{ width: '60px', maxHeight: '60px', minHeight: '50px' }}
+              alt=""
+            />
+            <div style={{ color: '#111', fontSize: '14px', marginTop: '2px' }}>
               <span>{dataItem?.text}</span>
             </div>
           </div>
