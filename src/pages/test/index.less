@@ -1,6 +1,37 @@
-
 .normal {
 }
 
 .title {
+}
+.wrapper {
+  :global {
+    .am-search-input .am-search-synthetic-ph {
+      padding-left: 15px;
+      width: 100%;
+      text-align: left;
+      height: 3.2rem;
+      line-height: 3.2rem;
+    }
+    .am-search-cancel {
+      color: #666;
+    }
+    .am-search-input input[type='search'],
+    .am-search-synthetic-ph-placeholder,
+    .am-search-cancel {
+      font-size: 1.4rem;
+    }
+    .am-search-input {
+      border-radius: 3.2rem;
+      height: 3.2rem;
+      line-height: 3.2rem;
+    }
+    .am-search-synthetic-ph-container {
+      display: flex;
+      align-items: center;
+    }
+    .am-search-input .am-search-synthetic-ph-icon {
+      height: 12px;
+      background-size: 13px auto;
+    }
+  }
 }

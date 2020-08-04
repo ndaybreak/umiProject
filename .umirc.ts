@@ -8,6 +8,7 @@ export default defineConfig({
   },
   routes: [
     { path: '/login', component: '@/pages/login/index', title: '欢迎登陆' },
+    { path: '/test', component: '@/pages/test/index', title: '测试' },
     { path: '/recipe/list/:month', component: '@/pages/recipe/list' },
     { path: '/recipe/detail', component: '@/pages/recipe/detail' },
     {

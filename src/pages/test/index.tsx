@@ -1,30 +1,39 @@
-import React, {useEffect, useState} from "react"
-import {  connect, Dispatch, useRouteMatch } from 'umi'
-import { Button } from 'antd-mobile'
-import {ConnectState} from '@/models/connect'
-
+import React, { useEffect, useState } from 'react';
+import { connect, Dispatch, useRouteMatch } from 'umi';
+import { Button, SearchBar } from 'antd-mobile';
+import { ConnectState } from '@/models/connect';
+import styles from './index.less';
 
 interface TestProps {
-  dispatch: Dispatch
-  loading?: boolean
+  dispatch: Dispatch;
+  loading?: boolean;
 }
 
-const Index: React.FC<TestProps> = (props) => {
-  const { dispatch, loading } = props
+const Index: React.FC<TestProps> = props => {
+  const { dispatch, loading } = props;
+  const [value, setValue] = useState('');
+  const [str, setStr] = useState('');
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, []);
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       Page WX
       <div>
-        <Button type="primary">打开地图</Button>
+        <Button>打开地图</Button>
       </div>
+      <SearchBar
+        value={value}
+        placeholder="请输入商品名/药品通用名"
+        onSubmit={value => setStr(value)}
+        onClear={value => console.log(value, 'onClear')}
+        onCancel={() => setValue('')}
+        onChange={val => setValue(val)}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default connect(({ global, loading }: ConnectState) => ({
   loading: loading.effects['orders/fetch'],
-}))(Index)
+}))(Index);
